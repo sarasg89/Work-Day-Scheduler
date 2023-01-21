@@ -1,6 +1,9 @@
-body {
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
+header {
+  font-family: 'Syne Mono', monospace;
+}
+
+main {
+  font-family: 'Hanken Grotesk', sans-serif;
 }
 
 textarea {
@@ -57,3 +60,4 @@ textarea {
   font-size: 20px;
   transition: all 0.3s ease-in-out;
 }
+
