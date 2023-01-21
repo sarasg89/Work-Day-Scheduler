@@ -2,9 +2,15 @@
 
 ## Description
 
-I have created a simple calendar application that allows the user to save event for each our of the day. 
+I have created a simple calendar application that allows the user to save events for each hour of the day.
+
+The current day and time are displayed at the top of the planner. The planner has blocks for each hour from 9 to 5 pm (standard business hours). The user can view the time blocks for the current day and each block is color-coded to indicate whether it's in the past, present or future.
+
+The user can click on a time block and enter some text to create an event then press the save button. If the user refreshes the page, the event is still displayed. 
 
 ## Screenshots
+
+![](./assets/images/Screenshot%201.png)
 
 ## Deployment
 
