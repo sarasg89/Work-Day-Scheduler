@@ -6,26 +6,27 @@ $(document).ready(function () {
   var timeIdEl = $(".time-block");
 
   // This an event listener for the save button. When the button is clicked, the user's input is saved into a variable. Both the user's input and the time of that text block are saved to local storage.
-
-  var infoSaved = []
-
   saveBtnEl.on("click", function (event) {
     // <i> clicked -> <button> -> <textarea> -> value entered by user
     var userInput = event.currentTarget.previousSibling.previousSibling.value;
     // <button> clicked -> parent <div> -> id
     var hourSaved = event.currentTarget.parentNode.getAttribute("id");
-
-    if (userInput === " ") {
-      return;
-    } else {
-      infoSaved.push({ time: hourSaved, todo: userInput });
-      localStorage.setItem("user schedule", JSON.stringify(infoSaved));
+    // This if statement allows new data to be added to the existing "user schedule" objet in local storage. Without these 4 lines of code, any time the save button is clicked, it deletes the previous data.
+    var infoSaved = []
+    var alreadyInStorage = localStorage.getItem("user schedule")
+    if (alreadyInStorage !== null) {
+      infoSaved = JSON.parse(alreadyInStorage);
     }
+
+    
+    infoSaved.push({ time: hourSaved, todo: userInput });
+    localStorage.setItem("user schedule", JSON.stringify(infoSaved));
+
   });
 
 
-  // This function applies the past, present, or future class to each time block by comparing the id to the current hour. 
 
+  // This function applies the past, present, or future class to each time block by comparing the id to the current hour. 
   function applyTimeClass() {
     // Using the dayjs() format, the variable is equal to the first 2 digits of the current time in 24 hour format
     var timeNow = dayjs().format("HH");
@@ -61,7 +62,12 @@ $(document).ready(function () {
     applyTimeClass();
 
     // Retrieve any saved information from local storage
-    var alreadySaved = JSON.parse(localStorage.getItem("user schedule"));
+    var alreadySaved = localStorage.getItem("user schedule")
+    if (alreadySaved !== null) {
+      alreadySaved = JSON.parse(alreadySaved);
+    } else {
+      return;
+    };
 
     // This for loop will iterate through all instances of timeIdEl, because this variable contains an array
     for (i = 0; i < timeIdEl.length; i++) {
