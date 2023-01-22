@@ -5,6 +5,9 @@ $(document).ready(function () {
   var checkBtnEl = $(".checkBtn");
   var timeIdEl = $(".time-block");
 
+  var infoSaved = []
+
+
   // This an event listener for the save button. When the button is clicked, the user's input is saved into a variable. Both the user's input and the time of that text block are saved to local storage.
   saveBtnEl.on("click", function (event) {
     // <i> clicked -> <button> -> <textarea> -> value entered by user
@@ -14,7 +17,6 @@ $(document).ready(function () {
     var hourSaved = event.currentTarget.parentNode.getAttribute("id");
 
     // This if statement allows new data to be added to the existing "user schedule" objet in local storage. Without these 4 lines of code, any time the save button is clicked, it deletes the previous data.
-    var infoSaved = []
     var alreadyInStorage = localStorage.getItem("user schedule")
     if (alreadyInStorage !== null) {
       infoSaved = JSON.parse(alreadyInStorage);
@@ -30,21 +32,28 @@ $(document).ready(function () {
     }
 
     // Both time and user's input are now saved into an object that then gets added to local storage. This part of the code only runs if this is a new todo item.
-    infoSaved.push({ time: hourSaved, todo: userInput })
+    infoSaved.push({ time: hourSaved, todo: userInput });
     localStorage.setItem("user schedule", JSON.stringify(infoSaved));
 
   });
 
   // This an event listener for the check button. When the button is clicked, the text inside that hour's slow is crossed out
   checkBtnEl.on("click", function (event) {
-    var infoChecked = []
-    var hourChecked = event.currentTarget.parentNode.getAttribute("id");
     var textBox = event.currentTarget.previousSibling.previousSibling.previousSibling.previousSibling;
-    console.log(textBox);
-
-    infoChecked.push({ time: hourChecked });
-    console.log(infoChecked);
     textBox.setAttribute("style", "text-decoration: line-through;");
+
+    var hourChecked = event.currentTarget.parentNode.getAttribute("id");
+    console.log(hourChecked)
+
+    for (i = 0; i < 10; i++) {
+      var hourSaved = JSON.parse(localStorage.getItem("user schedule"))[i].time;
+
+      if (hourChecked === hourSaved) {
+        console.log(hourSaved);
+        
+      }
+    }
+
   });
 
 
