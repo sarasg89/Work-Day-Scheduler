@@ -9,8 +9,10 @@ $(document).ready(function () {
   saveBtnEl.on("click", function (event) {
     // <i> clicked -> <button> -> <textarea> -> value entered by user
     var userInput = event.currentTarget.previousSibling.previousSibling.value;
+    
     // <button> clicked -> parent <div> -> id
     var hourSaved = event.currentTarget.parentNode.getAttribute("id");
+    
     // This if statement allows new data to be added to the existing "user schedule" objet in local storage. Without these 4 lines of code, any time the save button is clicked, it deletes the previous data.
     var infoSaved = []
     var alreadyInStorage = localStorage.getItem("user schedule")
@@ -18,8 +20,17 @@ $(document).ready(function () {
       infoSaved = JSON.parse(alreadyInStorage);
     }
 
-    
-    infoSaved.push({ time: hourSaved, todo: userInput });
+    // To check if any elements already save in local storage have the same time ID as the new data the user is trying to save. If true, the todo element is replaced with the new data and saved into local storage
+    for (i = 0; i < infoSaved.length; i++) {
+      if (infoSaved[i].time === hourSaved) {
+      infoSaved[i].todo = userInput;
+      localStorage.setItem("user schedule", JSON.stringify(infoSaved));
+      return;
+      }
+    }
+
+    // Both time and user's input are now saved into an object that then gets added to local storage. This part of the code only runs if this is a new todo item.
+    infoSaved.push({ time: hourSaved, todo: userInput })
     localStorage.setItem("user schedule", JSON.stringify(infoSaved));
 
   });
@@ -31,7 +42,7 @@ $(document).ready(function () {
     // Using the dayjs() format, the variable is equal to the first 2 digits of the current time in 24 hour format
     var timeNow = dayjs().format("HH");
 
-    // This for loop will iterate through all instances of timeIdEl, because this variable contains an array
+    // This for loop will iterate through all instances of timeIdEl, because this variable contains an array of all <div> elements with an ID of "hour-xx"
     for (i = 0; i < timeIdEl.length; i++) {
       // For the id "hour-xx" we use the .slice method to retrieve the last 2 characters
       var hourFromId = timeIdEl[i].getAttribute("id").slice(-2)
@@ -69,13 +80,14 @@ $(document).ready(function () {
       return;
     };
 
-    // This for loop will iterate through all instances of timeIdEl, because this variable contains an array
+    // This for loop will iterate through all instances of timeIdEl, because this variable contains an array of all <div> elements with an ID of "hour-xx"
     for (i = 0; i < timeIdEl.length; i++) {
       var hourFromId = timeIdEl[i].getAttribute("id");
       // For every object saved in local storage, retrieve the time and the todo item
       for (j = 0; j < alreadySaved.length; j++) {
         var timeSaved = alreadySaved[j].time;
         var todoSaved = alreadySaved[j].todo;
+        // If the stored time matches the time in a hour block, the stored information will display in that text box. <div id="hour-xx"> -> child in index 1 is <textarea>
         if (hourFromId === timeSaved) {
           timeIdEl[i].children[1].value = todoSaved;
         }
