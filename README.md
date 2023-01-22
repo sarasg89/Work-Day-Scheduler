@@ -30,7 +30,9 @@ All hour slots are now grey because the time is after 5 pm
 
 ## Credits
 
-The starter code for this application can be found in [this repository](https://github.com/coding-boot-camp/crispy-octo-meme) by Georgeyoo
+The starter code for this application can be found in [this repository](https://github.com/coding-boot-camp/crispy-octo-meme) by Georgeyoo.
+
+The weather widget is provide by [Weatherwidget.org](https://weatherwidget.org/).
 
 ## License
 
