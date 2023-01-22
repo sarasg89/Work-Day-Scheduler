@@ -24,6 +24,8 @@ All hour slots are now grey because the time is after 5 pm
 
 ## Deployment
 
+https://sarasg89.github.io/Work-Day-Scheduler/
+
 ## Credits
 
 The starter code for this application can be found in [this repository](https://github.com/coding-boot-camp/crispy-octo-meme) by Georgeyoo
