@@ -6,25 +6,27 @@ I have created a simple planner application that allows the user to save events 
 
 The current day and time are displayed at the top of the planner. The planner has blocks for each hour from 9 to 5 pm (standard business hours). The user can view the time blocks for the current day and each block is color-coded to indicate whether it's in the past, present or future.
 
-The user can click on a time block and enter some text to create an event then press the save button. If the user refreshes the page, the event is still displayed. 
+The user can click on a time block and enter some text to create an event then press the save button. If the user refreshes the page, the event is still displayed.
 
 ## Screenshots
 
 ### Empty scheduler
-![](./assets/images/Screenshot%201.png)
+
+![Screenshot of the empty scheduler](./assets/images/Screenshot%201.png)
 Time is 12 o'clock, any hour slots before this time will be grey, current slot is red and future slots will be green.
 
 ### Filled in scheduler
-![](./assets/images/Screenshot%202.png)
 
+![Screenshot of the scheduler with some events](./assets/images/Screenshot%202.png)
 
 ### End of day scheduler
-![](./assets/images/Screenshot%203.png)
+
+![Screenshot of the scheduler at the end of the day when all slots are grey](./assets/images/Screenshot%203.png)
 All hour slots are now grey because the time is after 5 pm
 
 ## Deployment
 
-https://sarasg89.github.io/Work-Day-Scheduler/
+<https://sarasg89.github.io/Work-Day-Scheduler/>
 
 ## Credits
 
