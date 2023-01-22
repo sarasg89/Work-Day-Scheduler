@@ -2,17 +2,17 @@
 $(document).ready(function () {
   var todayEl = $("#currentDay");
   var saveBtnEl = $(".saveBtn");
-  var mainEl = $("main");
+  var checkBtnEl = $(".checkBtn");
   var timeIdEl = $(".time-block");
 
   // This an event listener for the save button. When the button is clicked, the user's input is saved into a variable. Both the user's input and the time of that text block are saved to local storage.
   saveBtnEl.on("click", function (event) {
     // <i> clicked -> <button> -> <textarea> -> value entered by user
     var userInput = event.currentTarget.previousSibling.previousSibling.value;
-    
+
     // <button> clicked -> parent <div> -> id
     var hourSaved = event.currentTarget.parentNode.getAttribute("id");
-    
+
     // This if statement allows new data to be added to the existing "user schedule" objet in local storage. Without these 4 lines of code, any time the save button is clicked, it deletes the previous data.
     var infoSaved = []
     var alreadyInStorage = localStorage.getItem("user schedule")
@@ -23,9 +23,9 @@ $(document).ready(function () {
     // To check if any elements already save in local storage have the same time ID as the new data the user is trying to save. If true, the todo element is replaced with the new data and saved into local storage
     for (i = 0; i < infoSaved.length; i++) {
       if (infoSaved[i].time === hourSaved) {
-      infoSaved[i].todo = userInput;
-      localStorage.setItem("user schedule", JSON.stringify(infoSaved));
-      return;
+        infoSaved[i].todo = userInput;
+        localStorage.setItem("user schedule", JSON.stringify(infoSaved));
+        return;
       }
     }
 
@@ -35,6 +35,17 @@ $(document).ready(function () {
 
   });
 
+  // This an event listener for the check button. When the button is clicked, the text inside that hour's slow is crossed out
+  checkBtnEl.on("click", function (event) {
+    var infoChecked = []
+    var hourChecked = event.currentTarget.parentNode.getAttribute("id");
+    var textBox = event.currentTarget.previousSibling.previousSibling.previousSibling.previousSibling;
+    console.log(textBox);
+
+    infoChecked.push({ time: hourChecked });
+    console.log(infoChecked);
+    textBox.setAttribute("style", "text-decoration: line-through;");
+  });
 
 
   // This function applies the past, present, or future class to each time block by comparing the id to the current hour. 

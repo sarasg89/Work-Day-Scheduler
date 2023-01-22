@@ -46,21 +46,29 @@ textarea {
 }
 
 .future {
-  background-color: #00ccff;
+  background-color: #06aed5;
   opacity: 0.5;
   color: black;
 }
 
 .saveBtn {
   border-left: 1px solid black;
-  border-top-right-radius: 15px;
-  border-bottom-right-radius: 15px;
-  background-color: #06aed5;
+  background-color: #d56306ba;
   color: white;
 }
 
-.saveBtn i:hover {
-  font-size: 20px;
-  transition: all 0.3s ease-in-out;
+.saveBtn:hover {
+  background-color: #d56306;
 }
 
+.checkBtn {
+  border-left: 1px solid black;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+  background-color: #cbd506ba;
+  color: white;
+}
+
+.checkBtn:hover {
+  background-color: #cbd506;
+}
