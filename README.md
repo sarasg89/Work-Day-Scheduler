@@ -10,7 +10,17 @@ The user can click on a time block and enter some text to create an event then p
 
 ## Screenshots
 
+### Empty scheduler
 ![](./assets/images/Screenshot%201.png)
+Time is 12 o'clock, any hour slots before this time will be grey, current slot is red and future slots will be green.
+
+### Filled in scheduler
+![](./assets/images/Screenshot%202.png)
+
+
+### End of day scheduler
+![](./assets/images/Screenshot%203.png)
+All hour slots are now grey because the time is after 5 pm
 
 ## Deployment
 
