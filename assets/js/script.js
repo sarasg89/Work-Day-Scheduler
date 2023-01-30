@@ -2,8 +2,11 @@
 $(document).ready(function () {
   var todayEl = $("#currentDay");
   var saveBtnEl = $(".saveBtn");
-  var mainEl = $("main");
+  var checkBtnEl = $(".checkBtn");
   var timeIdEl = $(".time-block");
+
+  var infoSaved = []
+
 
   // This an event listener for the save button. When the button is clicked, the user's input is saved into a variable. Both the user's input and the time of that text block are saved to local storage.
   saveBtnEl.on("click", function (event) {
@@ -14,8 +17,7 @@ $(document).ready(function () {
     var hourSaved = $(this).parent().attr("id");
 
     // This if statement allows new data to be added to the existing "user schedule" objet in local storage. Without these 4 lines of code, any time the save button is clicked, it deletes the previous data.
-    var infoSaved = []
-    var alreadyInStorage = localStorage.getItem("user schedule")
+    var alreadyInStorage = localStorage.getItem("user schedule");
     if (alreadyInStorage !== null) {
       infoSaved = JSON.parse(alreadyInStorage);
     }
@@ -23,19 +25,35 @@ $(document).ready(function () {
     // To check if any elements already save in local storage have the same time ID as the new data the user is trying to save. If true, the todo element is replaced with the new data and saved into local storage
     for (i = 0; i < infoSaved.length; i++) {
       if (infoSaved[i].time === hourSaved) {
-      infoSaved[i].todo = userInput;
-      localStorage.setItem("user schedule", JSON.stringify(infoSaved));
-      return;
+        infoSaved[i].todo = userInput;
+        localStorage.setItem("user schedule", JSON.stringify(infoSaved));
+        return;
       }
     }
 
     // Both time and user's input are now saved into an object that then gets added to local storage. This part of the code only runs if this is a new todo item.
-    infoSaved.push({ time: hourSaved, todo: userInput })
+    infoSaved.push({ time: hourSaved, todo: userInput });
     localStorage.setItem("user schedule", JSON.stringify(infoSaved));
 
   });
 
+  // This an event listener for the check button. When the button is clicked, the text inside that hour's slow is crossed out
+  checkBtnEl.on("click", function (event) {
+    var textBox = $(this).siblings(".description");
+    textBox.attr("style", "text-decoration: line-through;");
 
+    var hourChecked = $(this).parent().attr("id");
+    var hourStored = JSON.parse(localStorage.getItem("user schedule"))
+
+    // This for loop checks that if the hour id of the box checked matches the hour id of local storage, that todo item is deleted from local storage
+    for (var i = 0; i < hourStored.length; i++) {
+      if (hourChecked === hourStored[i].time) {
+        hourStored[i].todo = ""
+        localStorage.setItem("user schedule", JSON.stringify(hourStored))
+      }
+    }
+
+  });
 
   // This function applies the past, present, or future class to each time block by comparing the id to the current hour. 
   function applyTimeClass() {
@@ -103,8 +121,4 @@ $(document).ready(function () {
   var time = dayjs().format("HH:mm");
   todayEl.text("Today is " + now + ". The time is " + time);
 
-});
-
-
-
-
+})
