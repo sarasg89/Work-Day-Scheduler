@@ -30,7 +30,7 @@ All hour slots are now grey because the time is after 5 pm. The user has also cr
 
 ## Deployment
 
-<https://sarasg89.github.io/Work-Day-Scheduler/>
+<https://sarasg89.github.io/what-are-you-doing-today/>
 
 ## Credits
 
